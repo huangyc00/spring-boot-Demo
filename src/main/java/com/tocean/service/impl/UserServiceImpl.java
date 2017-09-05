@@ -4,6 +4,8 @@ import com.tocean.Respository.UserRespository;
 import com.tocean.entity.User;
 import com.tocean.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -17,6 +19,7 @@ public class UserServiceImpl implements UserService{
 
     @Autowired
     private UserRespository userRespository;
+
     @Override
     public List<User> findAll() {
 
@@ -41,5 +44,11 @@ public class UserServiceImpl implements UserService{
     @Override
     public void updateUser(User user) {
         userRespository.save(user);
+    }
+
+    @Override
+    public Page<User> serachUsers(Pageable pageable, String name) {
+       Page<User> users =  userRespository.findByName(name,pageable);
+        return users;
     }
 }

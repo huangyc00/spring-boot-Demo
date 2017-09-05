@@ -10,6 +10,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
@@ -24,6 +27,7 @@ import static org.junit.Assert.*;
 @SpringBootTest
 public class UserServiceImplTest {
 
+
     private static  final Logger logger = LoggerFactory.getLogger(UserServiceImplTest.class);
     @Autowired
     private UserService userService;
@@ -32,6 +36,19 @@ public class UserServiceImplTest {
     public void findAll() throws Exception {
         List<User> users = userService.findAll();
         Assert.assertEquals(20,users.size());
+    }
+
+    @Test
+    public void serachUsers() throws Exception {
+        Integer page = 0;
+        Integer pageSize = 3 ;
+        String name = "设呢么";
+        Pageable pageable = new PageRequest(page,pageSize);
+        Page<User> pageObj = userService.serachUsers(pageable,name);
+        List<User> users = pageObj.getContent();
+        for(User user : users){
+
+        }
     }
 
     @Test

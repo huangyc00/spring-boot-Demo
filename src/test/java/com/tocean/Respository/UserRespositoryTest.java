@@ -26,7 +26,6 @@ import static org.junit.Assert.*;
 @SpringBootTest
 public class UserRespositoryTest {
 
-
     private static final Logger logger = LoggerFactory.getLogger(UserRespositoryTest.class);
     @Autowired
     private UserRespository userRespository;
@@ -81,6 +80,19 @@ public class UserRespositoryTest {
         Sort sort = new Sort(Sort.Direction.DESC, "id");
         List<User> users = userRespository.findFirst10ByUsernameLike("%user%",sort);
         for(User user : users){
+
+        }
+    }
+
+    @Test
+    public void findByName() throws Exception {
+        Integer page = 0;
+        Integer pageSize = 3 ;
+        String name = "设呢么";
+        Pageable pageable = new PageRequest(page,pageSize);
+        Page<User> pageObj =  userRespository.findByName(name,pageable);
+
+        for(User user : pageObj.getContent()){
 
         }
     }

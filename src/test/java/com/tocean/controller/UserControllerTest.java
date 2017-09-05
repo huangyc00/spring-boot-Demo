@@ -21,15 +21,23 @@ import static org.junit.Assert.*;
 @AutoConfigureMockMvc
 public class UserControllerTest {
 
+
     @Autowired
     private UserController userController;
 
     @Autowired
     private MockMvc mockMvc;
 
+
     @Test
     public void hello() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.get("/hello"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    public void serachUsers() throws Exception {
+        mockMvc.perform(MockMvcRequestBuilders.get("/user/search"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
     }
 

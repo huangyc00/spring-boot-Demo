@@ -28,10 +28,13 @@ public interface UserRespository extends JpaRepository<User,Integer>{
     //排序，一定要加by
     List<User> findByOrderByIdDesc();
 
-    //分页查询
-    //select * from t_user  order by id desc limit ?,?
-    Page<User> findBy(Pageable pageable);
+    //根据条件进行分页查询
+    //pageable中的page是从第0页开始
+    //select  * from t_user  where name=? limit ?
+    Page<User> findByName(String name,Pageable pageable);
 
+    //直接进行分页查询
+    Page<User> findBy(Pageable pageable);
     //通过id查询前面
     //select * where username like ? order by id desc limit 10
     List<User> findFirst10ByUsernameLike(String username, Sort sort);
