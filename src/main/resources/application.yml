@@ -1,0 +1,13 @@
+spring:
+  profiles:
+    #使用 dev 或者 product 的配置
+    active: product
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1/test_user?useUnicode=true&characterEncoding=utf8
+    username: root
+    password: mysql
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
